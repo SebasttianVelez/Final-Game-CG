@@ -1,1 +1,3 @@
-# Final-Game-CG
+# FinalProjectCG
+
+Proyecto final para Computación Gráfica
