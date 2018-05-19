@@ -24,6 +24,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y = py
 		self.vel_x = 0
 		self.vel_y = 0
+		self.gravity = 4
 		self.disp = False
 	def update(self):
 		self.disp = False
