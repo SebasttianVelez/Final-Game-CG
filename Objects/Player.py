@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
 	def __init__(self, px, py):
 		pygame.sprite.Sprite.__init__(self)
 		self.health = 20000
-		self.cut = CortarImagen(img1, 0, 0, 7, 4)
+		self.cut = CortarImagen(img1, 1, 1, 7, 4)
 		self.image = self.cut
 		self.rect = self.image.get_rect()
 		self.rect.x = px
@@ -25,7 +25,9 @@ class Player(pygame.sprite.Sprite):
 		self.vel_x = 0
 		self.vel_y = 0
 		self.disp = False
+		self.saltar = False
 	def update(self):
+		self.image = self.cut
 		self.disp = False
 		self.rect.x += self.vel_x
 				
