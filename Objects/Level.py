@@ -1,6 +1,7 @@
 import pygame
 import random
 
+#Imagenes
 img1 = pygame.image.load('Images/Lvl-1/Mapa.png')
 
 def CortarImagen (image, x, y, eX, eY):
