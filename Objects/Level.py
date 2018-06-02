@@ -1,8 +1,7 @@
 import pygame
 import random
 
-#Imagenes
-img1 = pygame.image.load('Images/Lvl-1/Mapa.png')
+screen = pygame.image.load('Images/Lvl-1/Mapa.png')
 
 def CortarImagen (image, x, y, eX, eY):
 	info=image.get_rect()
@@ -16,9 +15,11 @@ def CortarImagen (image, x, y, eX, eY):
 class Level(pygame.sprite.Sprite):
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.cut = CortarImagen(img1, 0, 0, 1, 1)
+		self.cut = CortarImagen(screen, 0, 0, 1, 1)
 		self.image = self.cut
 		self.rect = self.image.get_rect()
 		self.rect.x = 0
 		self.rect.y = 0
+	def update(self):
+		self.image = self.cut
 				

@@ -3,16 +3,15 @@
 
 import pygame
 import random
-from Objects.Player import *
 from Objects.Level import *
-img1 = pygame.image.load('Images/Pjs/PJSebas.png')
-
+from Objects.Player import *
 
 #Definicion de Variables
 ancho = 1200
 alto = 650
 TIC = 20
 i1 = 0
+i2 = 6
 
 if __name__ == '__main__':
 #Inicializacion de Pygame
@@ -30,16 +29,17 @@ if __name__ == '__main__':
 
 	#CREACION DE OBJETOS
 
-
-	#Nivel 1
-	Lvl1 = Level()
-	Lvls.add(Lvl1)
-	todos.add(Lvl1)
 	#Jugador
 	Jugador = Player(100, 500)
 	Players.add(Jugador)
 	todos.add(Jugador)
 	#Jugador 2 ()
+
+	#Nivel 1
+	Lvl1 = Level()
+	Lvls.add(Lvl1)
+	todos.add(Lvl1)
+
 
 
 
@@ -63,7 +63,8 @@ while not close:
 				Jugador.vel_y = 0
 				mirada = False
 				i2 = 0
-
+			elif event.key == pygame.K_g:
+				Jugador.saltar = True
 			
 			if event.key == pygame.K_s:
 				Jugador.saltar = True
@@ -77,15 +78,33 @@ while not close:
 #------------------------------------------------------------------------------ Movimiento de sprites
 	if(Jugador.vel_x>0):#movimiento a la derecha
 		Jugador.cut=CortarImagen(img1,i1,1,7,4)
-		print i1
+		Jugador.dir = True
 		if i1 >=6:
 			i1 = 0
 		else:
 			i1 +=1
-	if(Jugador.vel<0):
+	if(Jugador.vel_x<0):#movimiento a la izquierda
+		Jugador.cut=CortarImagen(img2, i2,1, 7, 4)
+		Jugador.dir = False
+		if i2<=0:
+			i2 = 6
+		else:
+			i2 -=1
+
+	if(Jugador.vel_x==0):#Sin movimiento
+		#Evaluar direccion
+		if Jugador.dir:
+			Jugador.cut = CortarImagen(img1, 6, 2, 7, 4)
+		else:
+			Jugador.cut = CortarImagen(img2, 0, 2, 7, 4)
+
+
+		'''
+	if(Jugador.vel_x<0):
 		Jugador.cut=CortarImagen(img2, i2, 7, 4)
-	todos.update()
+	'''
 	todos.draw(Screen)
+	todos.update()
 	pygame.display.flip()
 	reloj.tick(TIC)
 

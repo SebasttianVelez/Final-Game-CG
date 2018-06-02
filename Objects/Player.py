@@ -2,7 +2,7 @@ import pygame
 import random
 
 img1 = pygame.image.load('Images/Pjs/PJSebas.png')
-img2 = pygame.image.load('Images/Pjs/PJSebas.png')
+img2 = pygame.image.load('Images/Pjs/PJSebas2.png')
 
 def CortarImagen (image, x, y, eX, eY):
 	info=image.get_rect()
@@ -24,8 +24,9 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y = py
 		self.vel_x = 0
 		self.vel_y = 0
+		self.dir = True
 		self.disp = False
-		self.saltar = False
+		self.saltar	 = False
 	def update(self):
 		self.image = self.cut
 		self.disp = False
