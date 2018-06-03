@@ -129,7 +129,8 @@ while not close:
 	for c in col_platform:
 		if Jugador.rect.top < c.rect.bottom and Jugador.rect.top > c.rect.top:
 			Jugador.rect.top=c.rect.bottom
-		elif Jugador.rect.bottom > c.rect.top:
+			Jugador.gravity=0
+		elif Jugador.rect.bottom >= c.rect.top:
 			Jugador.rect.bottom=c.rect.top
 			Jugador.gravity=0
 		elif Jugador.rect.left < c.rect.right:

@@ -11,7 +11,7 @@ def CortarImagen (image, x, y, eX, eY):
 	al_corte = int(al_image/eY)
 	cuadro = image.subsurface(x*an_corte,y*al_corte, an_corte, al_corte)
 	return cuadro
-gravedad=2.5
+gravedad=4.5
 limite_salto =200
 class Player(pygame.sprite.Sprite):
 	def __init__(self, px, py):
