@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
 	#Jugador
 
-	Jugador = Player(100, 500)
+	Jugador = Player(0, 0)
 	Players.add(Jugador)
 	todos.add(Jugador)
 	#Jugador 2 ()
@@ -51,12 +51,12 @@ if __name__ == '__main__':
 	Lvls.add(Lvl1)
 
 
+"""
+Hay que modificar la forma en la que se mueve el personaje
 
+Mejorar salto
 
-
-
-
-
+"""
 
 
 
@@ -82,7 +82,7 @@ while not close:
 			elif event.key == pygame.K_g:
 				Jugador.saltar = True
 
-			if event.key == pygame.K_s:
+			if event.key == pygame.K_SPACE:
 				Jugador.saltar = True
 
 #------------------------------------------------------------------------------Si el jugador suelta una tecla
@@ -123,13 +123,24 @@ while not close:
 		elif p.rect.x >= ancho-p.rect.x:
 			p.vel_x=-5
 			print "inicio izq"
+
+#colisiones
+	col_platform=pygame.sprite.spritecollide(Jugador,platforms,False)
+	for c in col_platform:
+		if Jugador.rect.bottom > c.rect.top:
+			Jugador.rect.bottom=c.rect.top
+			Jugador.vel_x=c.vel_x
+			Jugador.gravity=0
+			Jugador.saltar=False
+			
+
 		'''
 	if(Jugador.vel_x<0):
 		Jugador.cut=CortarImagen(img2, i2, 7, 4)
 	'''
+	print Jugador.saltar
 	Screen.fill([0,0,0])
 	Lvls.update()
-
 	todos.update()
 	Lvls.draw(Screen)
 	todos.draw(Screen)
