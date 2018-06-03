@@ -3,12 +3,12 @@ import random
 
 img1 = pygame.image.load('Images/Pjs/PJSebas.png')
 img2 = pygame.image.load('Images/Pjs/PJSebas2.png')
-
+Gravity= 2.5
 def CortarImagen (image, x, y, eX, eY):
 	info=image.get_rect()
-	an_image = info[2]	
+	an_image = info[2]
 	al_image = info[3]
-	an_corte = int(an_image/eX) 
+	an_corte = int(an_image/eX)
 	al_corte = int(al_image/eY)
 	cuadro = image.subsurface(x*an_corte,y*al_corte, an_corte, al_corte)
 	return cuadro
@@ -31,4 +31,4 @@ class Player(pygame.sprite.Sprite):
 		self.image = self.cut
 		self.disp = False
 		self.rect.x += self.vel_x
-				
+		

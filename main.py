@@ -37,6 +37,7 @@ if __name__ == '__main__':
 
 
 	#Jugador
+
 	Jugador = Player(100, 500)
 	Players.add(Jugador)
 	todos.add(Jugador)
@@ -48,7 +49,7 @@ if __name__ == '__main__':
 	#Nivel 1
 	Lvl1 = Level()
 	Lvls.add(Lvl1)
-	todos.add(Lvl1)
+
 
 
 
@@ -127,7 +128,10 @@ while not close:
 		Jugador.cut=CortarImagen(img2, i2, 7, 4)
 	'''
 	Screen.fill([0,0,0])
+	Lvls.update()
+
 	todos.update()
+	Lvls.draw(Screen)
 	todos.draw(Screen)
 	pygame.display.flip()
 	reloj.tick(TIC)
