@@ -5,6 +5,7 @@ import pygame
 import random
 from Objects.Level import *
 from Objects.Player import *
+from Objects.platform import platform
 
 #Definicion de Variables
 ancho = 1200
@@ -18,27 +19,41 @@ if __name__ == '__main__':
 	pygame.init()
 
 	#Crear variables locales
-	Screen = pygame.display.set_mode([ancho, alto])	
+	Screen = pygame.display.set_mode([ancho, alto])
 	close = False
 	reloj = pygame.time.Clock()
 
-	#Creacion de Gripos
+	#Creacion de Grupo
+
 	todos = pygame.sprite.Group()
 	Players = pygame.sprite.Group()
 	Lvls = pygame.sprite.Group()
+	platforms = pygame.sprite.Group()
+
+
 
 	#CREACION DE OBJETOS
+
+
 
 	#Jugador
 	Jugador = Player(100, 500)
 	Players.add(Jugador)
 	todos.add(Jugador)
 	#Jugador 2 ()
-
+	# #platforms
+	platform1=platform()
+	platforms.add(platform1)
+	todos.add(platform1)
 	#Nivel 1
 	Lvl1 = Level()
 	Lvls.add(Lvl1)
 	todos.add(Lvl1)
+
+
+
+
+
 
 
 
@@ -65,10 +80,10 @@ while not close:
 				i2 = 0
 			elif event.key == pygame.K_g:
 				Jugador.saltar = True
-			
+
 			if event.key == pygame.K_s:
 				Jugador.saltar = True
-			
+
 #------------------------------------------------------------------------------Si el jugador suelta una tecla
 		if event.type == pygame.KEYUP:
 			if (event.key == pygame.K_RIGHT)or(event.key == pygame.K_LEFT):
@@ -99,12 +114,20 @@ while not close:
 			Jugador.cut = CortarImagen(img2, 0, 2, 7, 4)
 
 
+# platforms
+	for p in platforms:
+		if p.rect.x <= 0:
+			p.vel_x=5
+			print "inicio der"
+		elif p.rect.x >= ancho-p.rect.x:
+			p.vel_x=-5
+			print "inicio izq"
 		'''
 	if(Jugador.vel_x<0):
 		Jugador.cut=CortarImagen(img2, i2, 7, 4)
 	'''
-	todos.draw(Screen)
+	Screen.fill([0,0,0])
 	todos.update()
+	todos.draw(Screen)
 	pygame.display.flip()
 	reloj.tick(TIC)
-
