@@ -29,6 +29,8 @@ class Player(pygame.sprite.Sprite):
 		self.dir = True
 		self.disp = False
 		self.saltar	 = False
+		self.is_jumping = False
+		self.vel_in_platform=0
 
 	def gravedad(self,v):
 		if self.vel_y == 0:
@@ -42,9 +44,14 @@ class Player(pygame.sprite.Sprite):
 		self.image = self.cut
 		self.disp = False
 
-		self.gravedad(0.5)
+		self.gravedad(0.9)
 		self.rect.y += self.vel_y
 
 		if self.rect.y >=500:
 			self.rect.y =500
+			self.is_jumping=False
+			self.vel_in_platform=0
+		if self.vel_in_platform != 0:
+			self.is_jumping=False
 		self.rect.x += self.vel_x
+		self.rect.x+=self.vel_in_platform

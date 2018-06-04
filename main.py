@@ -72,24 +72,25 @@ while not close:
 			close = True
 		if event.type == pygame.KEYDOWN:
 #---------------------------------------------------------------------Presionar teclas
-			if event.key == pygame.K_RIGHT:
-				Jugador.vel_x = 10
-				mirada = True
-				i1 = 0
-			elif event.key == pygame.K_LEFT:
-				Jugador.vel_x = -10
-				mirada = False
-				i2 = 0
-			elif event.key == pygame.K_g:
-				Jugador.saltar = True
+			if not Jugador.is_jumping:
+				if event.key == pygame.K_RIGHT:
+					Jugador.vel_x = 10
+					mirada = True
+					i1 = 0
+				elif event.key == pygame.K_LEFT:
+					Jugador.vel_x = -10
+					mirada = False
+					i2 = 0
+				elif event.key == pygame.K_g:
+					Jugador.saltar = True
 
-			elif event.key == pygame.K_SPACE:
-				Jugador.saltar = True
+				if event.key == pygame.K_SPACE:
+					Jugador.saltar = True
 
 #------------------------------------------------------------------------------Si el jugador suelta una tecla
+
 		if event.type == pygame.KEYUP:
 			if (event.key == pygame.K_RIGHT)or(event.key == pygame.K_LEFT):
-				Jugador.vel_y = 0
 				Jugador.vel_x = 0
 				i0 = 0
 #------------------------------------------------------------------------------ Movimiento de sprites
@@ -131,13 +132,21 @@ while not close:
 		if Jugador.rect.bottom >= c.rect.top and Jugador.vel_y > 0:
 			Jugador.rect.bottom=c.rect.top
 			Jugador.vel_y=0
+			Jugador.vel_in_platform=c.vel_x
+		if Jugador.rect.right > c.rect.left and Jugador.vel_y==0:
+			Jugador.rect.right = c.rect.left
+			Jugador.vel_in_platform=c.vel_x
+
+
 
 
 
 
 	if Jugador.saltar:
 		Jugador.vel_y = -15
+		Jugador.vel_in_platform=0
 		Jugador.saltar=False
+		Jugador.is_jumping=True
 #colisiones
 
 
