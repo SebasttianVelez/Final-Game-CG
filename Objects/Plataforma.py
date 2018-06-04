@@ -2,20 +2,12 @@ import pygame
 import random
 from functions.cut import CortarImagen
 
-<<<<<<< HEAD
-img_plataforma = pygame.image.load('Images/Plataformas/Plataforma11.png')
-=======
 PL = pygame.image.load('Images/Plataformas/Plataforma11.png')
->>>>>>> 517bf93b0377368c43013b93cca4de10373bd8ab
 
 class Plataforma(pygame.sprite.Sprite):
 	def __init__(self, px, py):
 		pygame.sprite.Sprite.__init__(self)
-<<<<<<< HEAD
-		self.cut = CortarImagen(img_plataforma, 0, 0, 1, 1)
-=======
 		self.cut = CortarImagen(PL, 0, 0, 1, 1)
->>>>>>> 517bf93b0377368c43013b93cca4de10373bd8ab
 		self.image = self.cut
 		self.rect = self.image.get_rect()
 		self.rect.x= px
