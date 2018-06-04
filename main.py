@@ -183,7 +183,7 @@ while not close:
 	else:
 		for l in Lvls:
 			Lvl1.vel_x = 0
-		for i in Plataforx|mas:
+		for i in Plataformas:
 			i.vel_x = 0 
 #colisiones
 

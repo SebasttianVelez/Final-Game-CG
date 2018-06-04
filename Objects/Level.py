@@ -12,3 +12,7 @@ class Level(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.x = 0
 		self.rect.y = 0
+		self.vel_x = 0
+	def update(self):
+		self.image = self.cut
+		self.rect.x += self.vel_x
