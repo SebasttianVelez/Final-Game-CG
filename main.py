@@ -91,6 +91,7 @@ while not close:
 					balas_personaje.add(ukulele)
 					todos.add(ukulele)
 
+
 				if event.key == pygame.K_SPACE:
 					Jugador.saltar = True
 
@@ -144,7 +145,12 @@ while not close:
 			Jugador.rect.right = c.rect.left
 			Jugador.vel_in_platform=c.vel_x
 
-
+# remover elementos
+	for b in balas_personaje:
+		if b.rect.x>ancho or b.rect.y < 0:
+			balas_personaje.remove(b)
+			todos.remove(b)
+			print 'bala removida'
 
 
 
