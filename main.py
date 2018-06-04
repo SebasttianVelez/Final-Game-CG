@@ -5,7 +5,6 @@ import pygame
 import random
 from Objects.Level import *
 from Objects.Player import *
-from Objects.platform import platform
 from Objects.bullets import Ukulele,Paper
 from Objects.Plataforma import *
 
@@ -32,7 +31,6 @@ if __name__ == '__main__':
 	todos = pygame.sprite.Group()
 	Players = pygame.sprite.Group()
 	Lvls = pygame.sprite.Group()
-	platforms = pygame.sprite.Group()
 	balas_personaje  = pygame.sprite.Group()
 	all_enemies = pygame.sprite.Group()
 	bullets_enemies= pygame.sprite.Group()
@@ -64,10 +62,6 @@ if __name__ == '__main__':
 	Players.add(Jugador)
 	todos.add(Jugador)
 	#Jugador 2 ()
-	# #platforms
-	platform1=platform(img3,400,500)
-	platforms.add(platform1)
-	todos.add(platform1)
 	#Nivel 1
 	Lvl1 = Level()
 	Lvls.add(Lvl1)
@@ -152,25 +146,6 @@ while not close:
 
 
 
-# platforms
-	for p in platforms:
-		if p.rect.x <= 0:
-			p.vel_x=5
-		elif p.rect.x >= ancho-p.rect.x:
-			p.vel_x=-5
-# colisiones con plataformas
-	col_platform=pygame.sprite.spritecollide(Jugador,platforms,False)
-	for c in col_platform:
-		if Jugador.rect.top < c.rect.bottom and Jugador.vel_y < 0:
-			Jugador.rect.top=c.rect.bottom
-			Jugador.vel_y=0
-		elif Jugador.rect.bottom >= c.rect.top and Jugador.vel_y > 0:
-			Jugador.rect.bottom=c.rect.top
-			Jugador.vel_y=0
-			Jugador.vel_in_platform=c.vel_x
-		elif Jugador.rect.right > c.rect.left  :
-			Jugador.rect.right = c.rect.left
-			Jugador.vel_in_platform=c.vel_x
 #colisiones de balas
 	for e in all_enemies:
 		col_balas_jugador=pygame.sprite.spritecollide(e,balas_personaje,True)
