@@ -6,7 +6,7 @@ import random
 from Objects.Level import *
 from Objects.Player import *
 from Objects.platform import platform
-from Objects.bullets import Ukulele
+from Objects.bullets import Ukulele,Paper
 
 #Definicion de Variables
 ancho = 1200
@@ -32,15 +32,21 @@ if __name__ == '__main__':
 	Lvls = pygame.sprite.Group()
 	platforms = pygame.sprite.Group()
 	balas_personaje  = pygame.sprite.Group()
+	all_enemies = pygame.sprite.Group()
+	bullets_enemies= pygame.sprite.Group()
 
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
 	img3=pygame.image.load('Images/platform/Car.png')
 	img_ukulele=pygame.image.load('Images/Instruments/ukulele1.png')
+	img_paper=pygame.image.load('Images/Instruments/paper.png')
 
 	#CREACION DE OBJETOS
 
-
+	#enemigos
+	enemy=Enemies(800,500)
+	all_enemies.add(enemy)
+	todos.add(enemy)
 
 	#Jugador
 
@@ -49,7 +55,7 @@ if __name__ == '__main__':
 	todos.add(Jugador)
 	#Jugador 2 ()
 	# #platforms
-	platform1=platform(img3,ancho,500)
+	platform1=platform(img3,400,500)
 	platforms.add(platform1)
 	todos.add(platform1)
 	#Nivel 1
@@ -57,13 +63,6 @@ if __name__ == '__main__':
 	Lvls.add(Lvl1)
 	#bullets
 
-
-"""
-Hay que modificar la forma en la que se mueve el personaje
-
-Mejorar salto
-
-"""
 
 
 
@@ -124,6 +123,14 @@ while not close:
 		else:
 			Jugador.cut = CortarImagen(img2, 0, 2, 7, 4)
 
+#comportamiento enemigos
+	for e in all_enemies:
+		if e.coldown== 40:
+			p=Paper(img_paper,enemy.rect.x,enemy.rect.y)
+			p.vel_x=-20
+			bullets_enemies.add(p)
+			todos.add(p)
+			e.coldown=0
 
 # platforms
 	for p in platforms:
@@ -131,7 +138,7 @@ while not close:
 			p.vel_x=5
 		elif p.rect.x >= ancho-p.rect.x:
 			p.vel_x=-5
-# colisiones con layaformas
+# colisiones con plataformas
 	col_platform=pygame.sprite.spritecollide(Jugador,platforms,False)
 	for c in col_platform:
 		if Jugador.rect.top < c.rect.bottom and Jugador.vel_y < 0:
@@ -144,6 +151,16 @@ while not close:
 		elif Jugador.rect.right > c.rect.left  :
 			Jugador.rect.right = c.rect.left
 			Jugador.vel_in_platform=c.vel_x
+#colisiones de balas
+	for e in all_enemies:
+		col_balas_jugador=pygame.sprite.spritecollide(e,balas_personaje,True)
+		for c in col_balas_jugador:
+			e.health-=20
+			print e.health
+		if e.health <=0:
+			all_enemies.remove(e)
+			todos.remove(e)
+			print 'enemigo removido'
 
 # remover elementos
 	for b in balas_personaje:

@@ -6,6 +6,6 @@ class platform (pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.rect.x=posx
         self.rect.y=posy
-        self.vel_x=-5
+        self.vel_x=0
     def update (self):
         self.rect.x += self.vel_x
