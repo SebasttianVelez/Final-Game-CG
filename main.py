@@ -188,13 +188,26 @@ while not close:
 		Jugador.vel_in_platform=0
 		Jugador.saltar=False
 		Jugador.is_jumping=True
+
+	#Movimiento del Fondo y plataformas
+
+	if(Jugador.vel_x != 0):
+		for l in Lvls:
+			Lvl1.vel_x = -Jugador.vel_x
+		for i in Plataformas:
+			i.vel_x = -Jugador.vel_x
+	else:
+		for l in Lvls:
+			Lvl1.vel_x = 0
+		for i in Plataforx|mas:
+			i.vel_x = 0 
 #colisiones
 
+	#Colisiones con plataformas
 
-		'''
-	if(Jugador.vel_x<0):
-		Jugador.cut=CortarImagen(img2, i2, 7, 4)
-	'''
+
+
+	
 	Screen.fill([0,0,0])
 	Lvls.update()
 	todos.update()
