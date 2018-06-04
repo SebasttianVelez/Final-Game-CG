@@ -31,7 +31,9 @@ if __name__ == '__main__':
 	Lvls = pygame.sprite.Group()
 	platforms = pygame.sprite.Group()
 
-
+	#Images
+	img=pygame.image.load ('Images/platform/Platform.png')
+	img3=pygame.image.load('Images/platform/Car.png')
 
 	#CREACION DE OBJETOS
 
@@ -44,7 +46,7 @@ if __name__ == '__main__':
 	todos.add(Jugador)
 	#Jugador 2 ()
 	# #platforms
-	platform1=platform()
+	platform1=platform(img3,ancho,500)
 	platforms.add(platform1)
 	todos.add(platform1)
 	#Nivel 1
@@ -115,13 +117,12 @@ while not close:
 
 
 # platforms
-	# for p in platforms:
-	# 	if p.rect.x <= 0:
-	# 		p.vel_x=5
-	# 		print "inicio der"
-	# 	elif p.rect.x >= ancho-p.rect.x:
-	# 		p.vel_x=-5
-	# 		print "inicio izq"
+	for p in platforms:
+		if p.rect.x <= 0:
+			p.vel_x=5
+		elif p.rect.x >= ancho-p.rect.x:
+			p.vel_x=-5
+
 	col_platform=pygame.sprite.spritecollide(Jugador,platforms,False)
 	for c in col_platform:
 		if Jugador.rect.top < c.rect.bottom and Jugador.vel_y < 0:

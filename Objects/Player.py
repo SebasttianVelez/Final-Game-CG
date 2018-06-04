@@ -42,9 +42,9 @@ class Player(pygame.sprite.Sprite):
 		self.image = self.cut
 		self.disp = False
 
-		self.gravedad(0.7)
+		self.gravedad(0.5)
 		self.rect.y += self.vel_y
 
-		if self.rect.y >=( Alto -self.rect.height):
-			self.rect.y = (Alto - self.rect.height)
+		if self.rect.y >=500:
+			self.rect.y =500
 		self.rect.x += self.vel_x
