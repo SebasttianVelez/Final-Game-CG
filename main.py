@@ -6,6 +6,7 @@ import random
 from Objects.Level import *
 from Objects.Player import *
 from Objects.platform import platform
+from Objects.bullets import Ukulele
 
 #Definicion de Variables
 ancho = 1200
@@ -30,10 +31,12 @@ if __name__ == '__main__':
 	Players = pygame.sprite.Group()
 	Lvls = pygame.sprite.Group()
 	platforms = pygame.sprite.Group()
+	balas_personaje  = pygame.sprite.Group()
 
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
 	img3=pygame.image.load('Images/platform/Car.png')
+	img_ukulele=pygame.image.load('Images/Instruments/ukulele1.png')
 
 	#CREACION DE OBJETOS
 
@@ -52,6 +55,7 @@ if __name__ == '__main__':
 	#Nivel 1
 	Lvl1 = Level()
 	Lvls.add(Lvl1)
+	#bullets
 
 
 """
@@ -82,7 +86,10 @@ while not close:
 					mirada = False
 					i2 = 0
 				elif event.key == pygame.K_g:
-					Jugador.saltar = True
+					ukulele=Ukulele(img_ukulele,Jugador.rect.x,Jugador.rect.y)
+					ukulele.vel_x=20
+					balas_personaje.add(ukulele)
+					todos.add(ukulele)
 
 				if event.key == pygame.K_SPACE:
 					Jugador.saltar = True
@@ -123,17 +130,17 @@ while not close:
 			p.vel_x=5
 		elif p.rect.x >= ancho-p.rect.x:
 			p.vel_x=-5
-
+# colisiones con layaformas
 	col_platform=pygame.sprite.spritecollide(Jugador,platforms,False)
 	for c in col_platform:
 		if Jugador.rect.top < c.rect.bottom and Jugador.vel_y < 0:
 			Jugador.rect.top=c.rect.bottom
 			Jugador.vel_y=0
-		if Jugador.rect.bottom >= c.rect.top and Jugador.vel_y > 0:
+		elif Jugador.rect.bottom >= c.rect.top and Jugador.vel_y > 0:
 			Jugador.rect.bottom=c.rect.top
 			Jugador.vel_y=0
 			Jugador.vel_in_platform=c.vel_x
-		if Jugador.rect.right > c.rect.left and Jugador.vel_y==0:
+		elif Jugador.rect.right > c.rect.left  :
 			Jugador.rect.right = c.rect.left
 			Jugador.vel_in_platform=c.vel_x
 
