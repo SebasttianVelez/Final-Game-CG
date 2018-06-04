@@ -7,8 +7,6 @@ size = width, height = [Ancho,Alto]
 img1 = pygame.image.load('Images/Pjs/PJSebas.png')
 img2 = pygame.image.load('Images/Pjs/PJSebas2.png')
 
-gravedad=4.5
-limite_salto =300
 class Player(pygame.sprite.Sprite):
 	def __init__(self, px, py):
 		pygame.sprite.Sprite.__init__(self)
@@ -38,7 +36,7 @@ class Player(pygame.sprite.Sprite):
 		self.image = self.cut
 		self.disp = False
 
-		self.gravedad(0.9)
+		self.gravedad(3)
 		self.rect.y += self.vel_y
 
 		if self.rect.y >=500:

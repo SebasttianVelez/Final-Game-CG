@@ -76,22 +76,22 @@ while not close:
 			close = True
 		if event.type == pygame.KEYDOWN:
 #---------------------------------------------------------------------Presionar teclas
+
+			if event.key == pygame.K_RIGHT:
+				Jugador.vel_x = 10
+				mirada = True
+				i1 = 0
+			elif event.key == pygame.K_LEFT:
+				Jugador.vel_x = -10
+				mirada = False
+				i2 = 0
+			elif event.key == pygame.K_g:
+				ukulele=Ukulele(img_ukulele,Jugador.rect.x,Jugador.rect.y)
+				ukulele.vel_x=20
+				balas_personaje.add(ukulele)
+				todos.add(ukulele)
+
 			if not Jugador.is_jumping:
-				if event.key == pygame.K_RIGHT:
-					Jugador.vel_x = 10
-					mirada = True
-					i1 = 0
-				elif event.key == pygame.K_LEFT:
-					Jugador.vel_x = -10
-					mirada = False
-					i2 = 0
-				elif event.key == pygame.K_g:
-					ukulele=Ukulele(img_ukulele,Jugador.rect.x,Jugador.rect.y)
-					ukulele.vel_x=20
-					balas_personaje.add(ukulele)
-					todos.add(ukulele)
-
-
 				if event.key == pygame.K_SPACE:
 					Jugador.saltar = True
 
@@ -156,7 +156,7 @@ while not close:
 
 
 	if Jugador.saltar:
-		Jugador.vel_y = -15
+		Jugador.vel_y = -30
 		Jugador.vel_in_platform=0
 		Jugador.saltar=False
 		Jugador.is_jumping=True
