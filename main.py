@@ -14,6 +14,7 @@ TIC = 20
 i1 = 0
 i2 = 6
 
+
 if __name__ == '__main__':
 #Inicializacion de Pygame
 	pygame.init()
@@ -71,18 +72,16 @@ while not close:
 #---------------------------------------------------------------------Presionar teclas
 			if event.key == pygame.K_RIGHT:
 				Jugador.vel_x = 10
-				Jugador.vel_y = 0
 				mirada = True
 				i1 = 0
 			elif event.key == pygame.K_LEFT:
 				Jugador.vel_x = -10
-				Jugador.vel_y = 0
 				mirada = False
 				i2 = 0
 			elif event.key == pygame.K_g:
 				Jugador.saltar = True
 
-			if event.key == pygame.K_SPACE:
+			elif event.key == pygame.K_SPACE:
 				Jugador.saltar = True
 
 #------------------------------------------------------------------------------Si el jugador suelta una tecla
@@ -116,34 +115,35 @@ while not close:
 
 
 # platforms
-	for p in platforms:
-		if p.rect.x <= 0:
-			p.vel_x=5
-			print "inicio der"
-		elif p.rect.x >= ancho-p.rect.x:
-			p.vel_x=-5
-			print "inicio izq"
-
-#colisiones
+	# for p in platforms:
+	# 	if p.rect.x <= 0:
+	# 		p.vel_x=5
+	# 		print "inicio der"
+	# 	elif p.rect.x >= ancho-p.rect.x:
+	# 		p.vel_x=-5
+	# 		print "inicio izq"
 	col_platform=pygame.sprite.spritecollide(Jugador,platforms,False)
 	for c in col_platform:
-		if Jugador.rect.top < c.rect.bottom and Jugador.rect.top > c.rect.top:
+		if Jugador.rect.top < c.rect.bottom and Jugador.vel_y < 0:
 			Jugador.rect.top=c.rect.bottom
-			Jugador.gravity=0
-		elif Jugador.rect.bottom >= c.rect.top:
+			Jugador.vel_y=0
+		if Jugador.rect.bottom >= c.rect.top and Jugador.vel_y > 0:
 			Jugador.rect.bottom=c.rect.top
-			Jugador.gravity=0
-		elif Jugador.rect.left < c.rect.right:
-			Jugador.rect.left=c.rect.right
-		Jugador.saltar=False
+			Jugador.vel_y=0
 
+
+
+
+	if Jugador.saltar:
+		Jugador.vel_y = -15
+		Jugador.saltar=False
+#colisiones
 
 
 		'''
 	if(Jugador.vel_x<0):
 		Jugador.cut=CortarImagen(img2, i2, 7, 4)
 	'''
-	print Jugador.rect.bottom
 	Screen.fill([0,0,0])
 	Lvls.update()
 	todos.update()

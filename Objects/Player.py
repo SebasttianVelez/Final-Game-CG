@@ -1,6 +1,8 @@
 import pygame
 import random
-
+Ancho = 1200
+Alto = 650
+size = width, height = [Ancho,Alto]
 img1 = pygame.image.load('Images/Pjs/PJSebas.png')
 img2 = pygame.image.load('Images/Pjs/PJSebas2.png')
 def CortarImagen (image, x, y, eX, eY):
@@ -12,7 +14,7 @@ def CortarImagen (image, x, y, eX, eY):
 	cuadro = image.subsurface(x*an_corte,y*al_corte, an_corte, al_corte)
 	return cuadro
 gravedad=4.5
-limite_salto =200
+limite_salto =300
 class Player(pygame.sprite.Sprite):
 	def __init__(self, px, py):
 		pygame.sprite.Sprite.__init__(self)
@@ -27,29 +29,22 @@ class Player(pygame.sprite.Sprite):
 		self.dir = True
 		self.disp = False
 		self.saltar	 = False
-		self.gravity=gravedad
 
-	def Gravity (self):
-		if self.saltar :
-			self.gravity+=gravedad
-			self.rect.y-=self.gravity
+	def gravedad(self,v):
+		if self.vel_y == 0:
+			self.vel_y=1
 		else:
-			if self.rect.y < 500:
-				self.rect.y+=self.gravity
-				self.gravity+=gravedad
-			elif self.rect.y > 500:
-				self.rect.y=500
-				self.saltar=False
-
+			self.vel_y+=v
 
 
 
 	def update(self):
-
 		self.image = self.cut
 		self.disp = False
+
+		self.gravedad(0.7)
+		self.rect.y += self.vel_y
+
+		if self.rect.y >=( Alto -self.rect.height):
+			self.rect.y = (Alto - self.rect.height)
 		self.rect.x += self.vel_x
-		self.Gravity()
-		if self.rect.y<=limite_salto:
-			self.saltar=False
-			self.gravity=gravedad
