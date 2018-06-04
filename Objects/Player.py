@@ -7,6 +7,7 @@ size = width, height = [Ancho,Alto]
 img1 = pygame.image.load('Images/Pjs/PJSebas.png')
 img2 = pygame.image.load('Images/Pjs/PJSebas2.png')
 img_enemy= pygame.image.load ('Images/Enemies/enemy.png')
+img_wolf= pygame.image.load ('Images/Enemies/wolf2.png')
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self, px, py):
@@ -66,7 +67,7 @@ class Enemies (pygame.sprite.Sprite):
 		self.is_jumping = False
 		self.vel_in_platform=0
 		self.action=0
-		self.coldown=40
+		self.coldown=0
 	def update (self):
 		if self.action < 3:
 			self.cut=CortarImagen(img_enemy,self.action,0,3,1)
@@ -75,3 +76,18 @@ class Enemies (pygame.sprite.Sprite):
 		else:
 			self.action=0
 		self.coldown+=1
+
+class wolf (Enemies):
+	def __init__ (self,px,py):
+		Enemies.__init__(self,px,py)
+		self.cut = CortarImagen(img_wolf, 0, 0, 5, 1)
+		self.image = self.cut
+
+	def update (self):
+		if self.action < 4:
+			self.cut=CortarImagen(img_wolf,self.action,0,5,1)
+			self.action+=1
+			self.image=self.cut
+		else:
+			self.action=0
+		self.rect.x+=self.vel_x

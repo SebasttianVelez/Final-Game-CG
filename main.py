@@ -24,6 +24,7 @@ if __name__ == '__main__':
 	Screen = pygame.display.set_mode([ancho, alto])
 	close = False
 	reloj = pygame.time.Clock()
+	create_adds=0 # generador de enemigos
 
 	#Creacion de Grupo
 
@@ -85,7 +86,7 @@ while not close:
 				mirada = False
 				i2 = 0
 			elif event.key == pygame.K_g:
-				ukulele=Ukulele(img_ukulele,Jugador.rect.x,Jugador.rect.y)
+				ukulele=Ukulele(img_ukulele,Jugador.rect.right,Jugador.rect.y)
 				ukulele.vel_x=20
 				balas_personaje.add(ukulele)
 				todos.add(ukulele)
@@ -131,6 +132,16 @@ while not close:
 			bullets_enemies.add(p)
 			todos.add(p)
 			e.coldown=0
+
+	if create_adds==100:
+		w=wolf(ancho,550)
+		w.vel_x=-10
+		all_enemies.add(w)
+		todos.add(w)
+		create_adds=0
+	create_adds+=1
+
+
 
 # platforms
 	for p in platforms:
