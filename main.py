@@ -7,6 +7,7 @@ from Objects.Level import *
 from Objects.Player import *
 from Objects.platform import platform
 from Objects.bullets import Ukulele,Paper
+from Objects.Plataforma import *
 
 #Definicion de Variables
 ancho = 1200
@@ -35,6 +36,7 @@ if __name__ == '__main__':
 	balas_personaje  = pygame.sprite.Group()
 	all_enemies = pygame.sprite.Group()
 	bullets_enemies= pygame.sprite.Group()
+	Plataformas = pygame.sprite.Group()
 
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
@@ -48,7 +50,14 @@ if __name__ == '__main__':
 	enemy=Enemies(800,500)
 	all_enemies.add(enemy)
 	todos.add(enemy)
+	
+	
+	#Plataforma
 
+	Plataforma1 = Plataforma(500, 500)
+	Plataformas.add(Plataforma1)
+	todos.add(Plataforma1)
+	
 	#Jugador
 
 	Jugador = Player(100,500)
