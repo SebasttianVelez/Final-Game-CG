@@ -27,6 +27,9 @@ if __name__ == '__main__':
 	opcion_menu_inicial=1
 	reloj = pygame.time.Clock()
 	create_adds=0 # generador de enemigos
+	is_pause=False
+	pause_close=False
+	opcion_paause=1
 
 	#Creacion de Grupo
 
@@ -118,6 +121,8 @@ while not close:
 				ukulele.vel_x=20
 				balas_personaje.add(ukulele)
 				todos.add(ukulele)
+			if event.key == pygame.K_l:
+				is_pause=True
 
 			if not Jugador.is_jumping:
 				if event.key == pygame.K_SPACE:
@@ -129,7 +134,40 @@ while not close:
 			if (event.key == pygame.K_RIGHT)or(event.key == pygame.K_LEFT):
 				Jugador.vel_x = 0
 				i0 = 0
-#------------------------------------------------------------------------------ Movimiento de sprites
+#------------------------------------------------------------------------------
+# pausa
+	if is_pause:
+		while not pause_close:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pause_close=True
+					close=True
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_UP:
+						opcion_paause-=1
+					if event.key == pygame.K_DOWN:
+						opcion_paause+=1
+					if event.key == pygame.K_SPACE:
+						if opcion_paause == 1:
+							pause_close=True
+						if opcion_paause == 3:
+							pause_close=True
+							close = True
+
+			if opcion_paause > 3:
+				opcion_paause=3
+			if opcion_paause < 1:
+				opcion_paause=1
+			if opcion_paause==1:
+				pause=pygame.image.load('menu_pause/Pause_continue.png')
+			elif opcion_paause==2:
+				pause=pygame.image.load('menu_pause/Pause_restart.png')
+			elif opcion_paause==3:
+				pause=pygame.image.load('menu_pause/Pause_exit.png')
+			Screen.blit(pause,[0,0])
+			pygame.display.flip()
+
+#Movimiento de sprites
 	if(Jugador.vel_x>0):#movimiento a la derecha
 		Jugador.cut=CortarImagen(img1,i1,1,7,4)
 		Jugador.dir = True
@@ -216,7 +254,8 @@ while not close:
 
 
 
-
+	is_pause=False
+	pause_close=False
 	Screen.fill([0,0,0])
 	Lvls.update()
 	todos.update()
