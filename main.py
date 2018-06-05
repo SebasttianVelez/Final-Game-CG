@@ -23,6 +23,8 @@ if __name__ == '__main__':
 	#Crear variables locales
 	Screen = pygame.display.set_mode([ancho, alto])
 	close = False
+	close_menu_inicial =False
+	opcion_menu_inicial=1
 	reloj = pygame.time.Clock()
 	create_adds=0 # generador de enemigos
 
@@ -48,14 +50,14 @@ if __name__ == '__main__':
 	enemy=Enemies(800,500)
 	all_enemies.add(enemy)
 	todos.add(enemy)
-	
-	
+
+
 	#Plataforma
 
 	Plataforma1 = Plataforma(500, 500)
 	Plataformas.add(Plataforma1)
 	todos.add(Plataforma1)
-	
+
 	#Jugador
 
 	Jugador = Player(100,500)
@@ -68,6 +70,29 @@ if __name__ == '__main__':
 	#bullets
 
 
+
+while not close_menu_inicial:
+	for events in pygame.event.get():
+		if events.type == pygame.QUIT:
+			close_menu_inicial=True
+			close=True
+		if events.type==pygame.KEYDOWN:
+			if events.key==pygame.K_DOWN:
+				opcion_menu_inicial=2
+			if events.key==pygame.K_UP:
+				opcion_menu_inicial=1
+			if events.key==pygame.K_SPACE:
+				if opcion_menu_inicial==1:
+					close_menu_inicial=True
+				else:
+					close_menu_inicial=True
+					close=True
+	if opcion_menu_inicial==1:
+		menustart=pygame.image.load('menu_inicio/Menu_Start.png')
+	else :
+		menustart=pygame.image.load('menu_inicio/Menu_Exit.png')
+	Screen.blit(menustart,[0,0])
+	pygame.display.flip()
 
 
 
@@ -184,14 +209,14 @@ while not close:
 		for l in Lvls:
 			Lvl1.vel_x = 0
 		for i in Plataformas:
-			i.vel_x = 0 
+			i.vel_x = 0
 #colisiones
 
 	#Colisiones con plataformas
 
 
 
-	
+
 	Screen.fill([0,0,0])
 	Lvls.update()
 	todos.update()
