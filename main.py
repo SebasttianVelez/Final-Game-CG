@@ -14,7 +14,9 @@ alto = 650
 TIC = 20
 i1 = 0
 i2 = 6
-
+"""
+Mejorar el movimiento del fondo 
+"""
 
 if __name__ == '__main__':
 #Inicializacion de Pygame
@@ -57,9 +59,13 @@ if __name__ == '__main__':
 
 	#Plataforma
 
-	Plataforma1 = Plataforma(500, 500)
+	Plataforma1 = Plataforma(500, 460)
 	Plataformas.add(Plataforma1)
 	todos.add(Plataforma1)
+
+	Plataforma2 = Plataforma(800, 320)
+	Plataformas.add(Plataforma2)
+	todos.add(Plataforma2)
 
 	#Jugador
 
@@ -243,14 +249,37 @@ while not close:
 			Lvl1.vel_x = -Jugador.vel_x
 		for i in Plataformas:
 			i.vel_x = -Jugador.vel_x
+		for e in all_enemies:
+			e.vel_x= -Jugador.vel_x
 	else:
 		for l in Lvls:
 			Lvl1.vel_x = 0
 		for i in Plataformas:
 			i.vel_x = 0
+		for e in all_enemies:
+			e.vel_x=0
 #colisiones
 
 	#Colisiones con plataformas
+	col_plataformas = pygame.sprite.spritecollide(Jugador,Plataformas,False)
+	for c in col_plataformas:
+		if Jugador.rect.bottom >= c.rect.top and Jugador.vel_y > 0 :
+			Jugador.rect.bottom=c.rect.top
+			Jugador.is_jumping=False
+			Jugador.vel_y=1
+		# elif Jugador.rect.top < c.rect.bottom :
+		# 	Jugador.rect.top = c.rect.bottom
+		# 	Jugador.vel_y=1
+
+
+
+		# elif Jugador.rect.right > c.rect.left:
+		# 	Jugador.rect.right=c.rect.left
+		# elif Jugador.rect.left < c.rect.right :
+		# 	Jugador.rect.left=c.rect.right
+
+
+
 
 
 

@@ -76,6 +76,7 @@ class Enemies (pygame.sprite.Sprite):
 		else:
 			self.action=0
 		self.coldown+=1
+		self.rect.x+=self.vel_x
 
 class wolf (Enemies):
 	def __init__ (self,px,py):
