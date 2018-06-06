@@ -47,7 +47,6 @@ class Player(pygame.sprite.Sprite):
 			self.vel_in_platform=0
 		if self.vel_in_platform != 0:
 			self.is_jumping=False
-		self.rect.x += self.vel_x
 		self.rect.x+=self.vel_in_platform
 
 class Enemies (pygame.sprite.Sprite):
