@@ -7,6 +7,7 @@ from Objects.Level import *
 from Objects.Player import *
 from Objects.bullets import Ukulele,Paper,Ball
 from Objects.Plataforma import *
+from Objects.Star import *
 from Objects.items import item_heal,item_weapon
 # rules for programing balls
 # 1 = ball
@@ -50,6 +51,8 @@ if __name__ == '__main__':
 	Wolfs = pygame.sprite.Group()
 	items_heal=pygame.sprite.Group()
 	items_weapon=pygame.sprite.Group()
+	Stars = pygame.sprite.Group()
+
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
 	img3=pygame.image.load('Images/platform/Car.png')
@@ -59,6 +62,12 @@ if __name__ == '__main__':
 	img_item_ukulele=pygame.image.load('Images/Instruments/ukulele1.png')
 
 	#CREACION DE OBJETOS
+	
+	
+	#Creacion de Estrellitas
+	S = Star(100, 100)
+	Stars.add(S)
+	todos.add(S)
 
 	#enemigos
 	enemy=Enemies(800,500)
