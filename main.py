@@ -292,8 +292,10 @@ while not close:
 	for e in all_enemies:
 		col_balas_jugador=pygame.sprite.spritecollide(e,balas_personaje,True)
 		for c in col_balas_jugador:
-			e.health-=20
-			print e.health
+			if Jugador.type_weapon==1:
+				e.health-=20
+			elif Jugador.type_weapon==2:
+				e.health-=200 
 		if e.health <=0:
 			all_enemies.remove(e)
 			todos.remove(e)
