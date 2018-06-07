@@ -61,6 +61,7 @@ if __name__ == '__main__':
 	#Plataforma
 	x=100
 	y=450
+	id_platform=1
 	Plataforma1 = Plataforma(500, 460)
 	Plataformas.add(Plataforma1)
 	todos.add(Plataforma1)
@@ -72,11 +73,23 @@ if __name__ == '__main__':
 	for i in range (20):
 		p=Plataforma(x,y)
 		x+=900
+		p.id=id_platform
+		id_platform+=1
 		Plataformas.add(p)
 		todos.add(p)
 		p2=Plataforma(x+300,y-140)
+		p2.id=id_platform
 		Plataformas.add(p2)
 		todos.add(p2)
+		id_platform+=1
+
+	for p in  Plataformas:
+		if (p.id % 2) == 0:
+			e=Enemies(0,0)
+			e.rect.x=p.rect.x
+			e.rect.bottom=p.rect.top
+			all_enemies.add(e)
+			todos.add(e)
 
 	#Jugador
 
@@ -209,12 +222,14 @@ while not close:
 
 #comportamiento enemigos
 	for e in all_enemies:
-		if e.coldown== 40:
-			p=Paper(img_paper,enemy.rect.x,enemy.rect.y)
-			p.vel_x=-20
-			bullets_enemies.add(p)
-			todos.add(p)
+		if e.coldown==40:
+			if e.rect.x > 0 and e.rect.x < 1200:
+				p=Paper(img_paper,e.rect.x,e.rect.y)
+				p.vel_x=-20
+				bullets_enemies.add(p)
+				todos.add(p)
 			e.coldown=0
+
 
 	if create_adds==100:
 		w=wolf(ancho,550)
@@ -243,6 +258,12 @@ while not close:
 			balas_personaje.remove(b)
 			todos.remove(b)
 			print 'bala removida'
+#balas de enemigos
+	for b in bullets_enemies:
+		if b.rect.x <= 0:
+			bullets_enemies.remove(b)
+			todos.remove(b)
+			print 'Bala enemigo removida'
 
 
 
@@ -295,7 +316,7 @@ while not close:
 
 
 
-	print Lvl1.rect.x ,' ', Lvl1.rect.y
+
 	is_pause=False
 	pause_close=False
 	Screen.fill([0,0,0])
