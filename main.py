@@ -104,7 +104,7 @@ if __name__ == '__main__':
 	#bullets
 
 
-
+#---------------------------------------menu de inicio-------------------------------
 while not close_menu_inicial:
 	for events in pygame.event.get():
 		if events.type == pygame.QUIT:
@@ -112,23 +112,43 @@ while not close_menu_inicial:
 			close=True
 		if events.type==pygame.KEYDOWN:
 			if events.key==pygame.K_DOWN:
-				opcion_menu_inicial=2
+				if opcion_menu_inicial==1:
+					opcion_menu_inicial=2
+				elif opcion_menu_inicial==3:
+					opcion_menu_inicial=4
 			if events.key==pygame.K_UP:
-				opcion_menu_inicial=1
-			if events.key==pygame.K_SPACE:
+				if opcion_menu_inicial==2:
+					opcion_menu_inicial=1
+				elif opcion_menu_inicial==4:
+					opcion_menu_inicial=3
+			if events.key==pygame.K_LEFT:
+				if opcion_menu_inicial==3:
+					opcion_menu_inicial=1
+				elif opcion_menu_inicial==4:
+					opcion_menu_inicial=2
+			if events.key==pygame.K_RIGHT:
+				if opcion_menu_inicial==1:
+					opcion_menu_inicial=3
+				elif opcion_menu_inicial==2:
+					opcion_menu_inicial=4
+			if events.key==pygame.K_RETURN :
 				if opcion_menu_inicial==1:
 					close_menu_inicial=True
-				else:
+				elif opcion_menu_inicial==4:
 					close_menu_inicial=True
 					close=True
 	if opcion_menu_inicial==1:
-		menustart=pygame.image.load('menu_inicio/Menu_Start.png')
-	else :
-		menustart=pygame.image.load('menu_inicio/Menu_Exit.png')
+		menustart=pygame.image.load('menu_inicio/Menu_inicio_Start.jpeg')
+	elif opcion_menu_inicial==2:
+		menustart=pygame.image.load('menu_inicio/Menu_inicio_Tutorial.jpeg')
+	elif opcion_menu_inicial==3:
+		menustart=pygame.image.load('menu_inicio/Menu_inicio_Story.jpeg')
+	elif opcion_menu_inicial==4:
+		menustart=pygame.image.load('menu_inicio/Menu_inicio_Exit.jpeg')
 	Screen.blit(menustart,[0,0])
 	pygame.display.flip()
 
-
+#---------------------------------------------------
 
 	#inicializar el juego
 while not close:
@@ -258,6 +278,11 @@ while not close:
 		Jugador.health-=10
 		if Jugador.health <= 0:
 			close=True
+#clolisiones Jugador vs enemigos
+	col_Jugador_enemigos=pygame.sprite.spritecollide(Jugador,all_enemies,True)
+	for c in col_Jugador_enemigos:
+		Jugador.health-=100
+
 # remover elementos
 	for b in balas_personaje:
 		if b.rect.x>ancho or b.rect.y < 0:
