@@ -188,14 +188,18 @@ while not close:
 				mirada = False
 				i2 = 0
 			elif event.key == pygame.K_g:
+				if Jugador.dir:
+					vel=20
+				else:
+					vel=-20
 				if Jugador.type_weapon==1:
 					ball=Ball(Jugador.rect.right,Jugador.rect.y)
-					ball.vel_x=20
+					ball.vel_x=vel
 					balas_personaje.add(ball)
 					todos.add(ball)
 				elif Jugador.type_weapon==2:
 					ukulele=Ukulele(Jugador.rect.right,Jugador.rect.y)
-					ukulele.vel_x=20
+					ukulele.vel_x=vel
 					balas_personaje.add(ukulele)
 					todos.add(ukulele)
 			if event.key == pygame.K_ESCAPE:
