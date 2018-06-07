@@ -7,6 +7,7 @@ from Objects.Level import *
 from Objects.Player import *
 from Objects.bullets import Ukulele,Paper
 from Objects.Plataforma import *
+from Objects.items import item_heal
 
 #Definicion de Variables
 ancho = 1200
@@ -44,12 +45,14 @@ if __name__ == '__main__':
 	bullets_enemies= pygame.sprite.Group()
 	Plataformas = pygame.sprite.Group()
 	Wolfs = pygame.sprite.Group()
+	items_heal=pygame.sprite.Group()
 
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
 	img3=pygame.image.load('Images/platform/Car.png')
 	img_ukulele=pygame.image.load('Images/Instruments/ukulele1.png')
 	img_paper=pygame.image.load('Images/Instruments/paper.png')
+	img_item_heal=pygame.image.load('Images/Items/item_heal.png')
 
 	#CREACION DE OBJETOS
 
@@ -91,6 +94,12 @@ if __name__ == '__main__':
 			e.rect.bottom=p.rect.top
 			all_enemies.add(e)
 			todos.add(e)
+		if p.id == 5 or p.id ==1 or p.id==12:
+			i=item_heal(img_item_heal,0,0)
+			i.rect.x=p.rect.x+15
+			i.rect.bottom=p.rect.top
+			items_heal.add(i)
+			todos.add(i)
 
 	#Jugador
 
@@ -296,7 +305,13 @@ while not close:
 			todos.remove(b)
 			print 'Bala enemigo removida'
 
-
+# recoleccion de items
+	col_Jugador_item_heal=pygame.sprite.spritecollide(Jugador,items_heal,True)
+	for c in col_Jugador_item_heal:
+		if Jugador.health < 300:
+			Jugador.health+=20
+		if Jugador.health > 300:
+			Jugador.health=300
 
 
 
@@ -315,6 +330,8 @@ while not close:
 			i.vel_x = -Jugador.vel_x
 		for e in all_enemies:
 			e.vel_x= -Jugador.vel_x
+		for i in items_heal:
+			i.vel_x=-Jugador.vel_x
 
 
 
@@ -325,6 +342,8 @@ while not close:
 			i.vel_x = 0
 		for e in all_enemies:
 			e.vel_x=0
+		for i in items_heal:
+			i.vel_x=0
 
 #colisiones
 
