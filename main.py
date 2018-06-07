@@ -165,7 +165,7 @@ while not close_menu_inicial:
 		menustart=pygame.image.load('menu_inicio/Menu_inicio_Story.jpeg')
 	elif opcion_menu_inicial==4:
 		menustart=pygame.image.load('menu_inicio/Menu_inicio_Exit.jpeg')
-	Screen.blit(menustart,[0,0])
+	Screen.blit(menustart,[-50,0])
 	pygame.display.flip()
 
 #---------------------------------------------------
