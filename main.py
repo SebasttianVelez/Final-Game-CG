@@ -232,13 +232,13 @@ while not close:
 			e.coldown=0
 
 
-	if create_adds==100:
-		w=wolf(ancho,550)
-		w.vel_x=-10
-		Wolfs.add(w)
-		todos.add(w)
-		create_adds=0
-	create_adds+=1
+	# if create_adds==100:
+	# 	w=wolf(ancho,550)
+	# 	w.vel_x=-10
+	# 	Wolfs.add(w)
+	# 	todos.add(w)
+	# 	create_adds=0
+	# create_adds+=1
 
 
 
