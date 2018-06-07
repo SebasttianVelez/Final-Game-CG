@@ -12,7 +12,7 @@ img_wolf= pygame.image.load ('Images/Enemies/wolf2.png')
 class Player(pygame.sprite.Sprite):
 	def __init__(self, px, py):
 		pygame.sprite.Sprite.__init__(self)
-		self.health = 20000
+		self.health = 300
 		self.cut = CortarImagen(img1, 1, 1, 7, 4)
 		self.image = self.cut
 		self.rect = self.image.get_rect()

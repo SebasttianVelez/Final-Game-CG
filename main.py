@@ -32,6 +32,7 @@ if __name__ == '__main__':
 	is_pause=False
 	pause_close=False
 	opcion_paause=1
+	vidaJugador=pygame.font.Font(None,32)
 
 	#Creacion de Grupo
 
@@ -241,7 +242,7 @@ while not close:
 
 
 
-#colisiones de balas
+#colisiones de balas Jugador y enemigos
 	for e in all_enemies:
 		col_balas_jugador=pygame.sprite.spritecollide(e,balas_personaje,True)
 		for c in col_balas_jugador:
@@ -251,7 +252,12 @@ while not close:
 			all_enemies.remove(e)
 			todos.remove(e)
 			print 'enemigo removido'
-
+# colisones de balas enemigos Jugador
+	col_balas_enemigos=pygame.sprite.spritecollide(Jugador,bullets_enemies,True)
+	for c in col_balas_enemigos:
+		Jugador.health-=10
+		if Jugador.health <= 0:
+			close=True
 # remover elementos
 	for b in balas_personaje:
 		if b.rect.x>ancho or b.rect.y < 0:
@@ -264,6 +270,7 @@ while not close:
 			bullets_enemies.remove(b)
 			todos.remove(b)
 			print 'Bala enemigo removida'
+
 
 
 
@@ -283,6 +290,8 @@ while not close:
 			i.vel_x = -Jugador.vel_x
 		for e in all_enemies:
 			e.vel_x= -Jugador.vel_x
+
+
 
 	else:
 		for l in Lvls:
@@ -319,10 +328,13 @@ while not close:
 
 	is_pause=False
 	pause_close=False
+	text=vidaJugador.render('Sebastian Velez (el de instagram)',False,[0,0,255])
 	Screen.fill([0,0,0])
 	Lvls.update()
 	todos.update()
 	Lvls.draw(Screen)
 	todos.draw(Screen)
+	Screen.blit(text,[0,0])
+	pygame.draw.line(Screen,[255,0,0],[0,30],[Jugador.health,30],10)
 	pygame.display.flip()
 	reloj.tick(TIC)
