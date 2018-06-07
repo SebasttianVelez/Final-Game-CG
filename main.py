@@ -244,7 +244,7 @@ while not close:
 			Screen.fill([0,0,0])
 			todos.draw(Screen)
 			Lvls.draw(Screen)
-			Screen.blit(pause,[100,0])
+			Screen.blit(pause,[150,0])
 			pygame.display.flip()
 
 #Movimiento de sprites
