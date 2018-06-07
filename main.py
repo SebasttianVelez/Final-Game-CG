@@ -15,7 +15,7 @@ TIC = 20
 i1 = 0
 i2 = 6
 """
-Mejorar el movimiento del fondo 
+Mejorar el movimiento del fondo
 """
 
 if __name__ == '__main__':
@@ -42,6 +42,7 @@ if __name__ == '__main__':
 	all_enemies = pygame.sprite.Group()
 	bullets_enemies= pygame.sprite.Group()
 	Plataformas = pygame.sprite.Group()
+	Wolfs = pygame.sprite.Group()
 
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
@@ -58,7 +59,8 @@ if __name__ == '__main__':
 
 
 	#Plataforma
-
+	x=100
+	y=450
 	Plataforma1 = Plataforma(500, 460)
 	Plataformas.add(Plataforma1)
 	todos.add(Plataforma1)
@@ -67,9 +69,18 @@ if __name__ == '__main__':
 	Plataformas.add(Plataforma2)
 	todos.add(Plataforma2)
 
+	for i in range (20):
+		p=Plataforma(x,y)
+		x+=900
+		Plataformas.add(p)
+		todos.add(p)
+		p2=Plataforma(x+300,y-140)
+		Plataformas.add(p2)
+		todos.add(p2)
+
 	#Jugador
 
-	Jugador = Player(100,500)
+	Jugador = Player(500,500)
 	Players.add(Jugador)
 	todos.add(Jugador)
 	#Jugador 2 ()
@@ -208,7 +219,7 @@ while not close:
 	if create_adds==100:
 		w=wolf(ancho,550)
 		w.vel_x=-10
-		all_enemies.add(w)
+		Wolfs.add(w)
 		todos.add(w)
 		create_adds=0
 	create_adds+=1
@@ -251,6 +262,7 @@ while not close:
 			i.vel_x = -Jugador.vel_x
 		for e in all_enemies:
 			e.vel_x= -Jugador.vel_x
+
 	else:
 		for l in Lvls:
 			Lvl1.vel_x = 0
@@ -258,6 +270,7 @@ while not close:
 			i.vel_x = 0
 		for e in all_enemies:
 			e.vel_x=0
+
 #colisiones
 
 	#Colisiones con plataformas
@@ -282,7 +295,7 @@ while not close:
 
 
 
-
+	print Lvl1.rect.x ,' ', Lvl1.rect.y
 	is_pause=False
 	pause_close=False
 	Screen.fill([0,0,0])
