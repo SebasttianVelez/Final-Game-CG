@@ -198,7 +198,7 @@ while not close:
 					ukulele.vel_x=20
 					balas_personaje.add(ukulele)
 					todos.add(ukulele)
-			if event.key == pygame.K_l:
+			if event.key == pygame.K_ESCAPE:
 				is_pause=True
 
 			if not Jugador.is_jumping:
@@ -224,7 +224,7 @@ while not close:
 						opcion_paause-=1
 					if event.key == pygame.K_DOWN:
 						opcion_paause+=1
-					if event.key == pygame.K_SPACE:
+					if event.key == pygame.K_RETURN :
 						if opcion_paause == 1:
 							pause_close=True
 						if opcion_paause == 3:
@@ -241,6 +241,9 @@ while not close:
 				pause=pygame.image.load('menu_pause/Pause_restart.png')
 			elif opcion_paause==3:
 				pause=pygame.image.load('menu_pause/Pause_exit.png')
+			Screen.fill([0,0,0])
+			todos.draw(Screen)
+			Lvls.draw(Screen)
 			Screen.blit(pause,[0,0])
 			pygame.display.flip()
 
@@ -295,7 +298,7 @@ while not close:
 			if Jugador.type_weapon==1:
 				e.health-=20
 			elif Jugador.type_weapon==2:
-				e.health-=200 
+				e.health-=200
 		if e.health <=0:
 			all_enemies.remove(e)
 			todos.remove(e)
