@@ -6,7 +6,7 @@ Alto = 650
 size = width, height = [Ancho,Alto]
 img1 = pygame.image.load('Images/Pjs/PJSebas.png')
 img2 = pygame.image.load('Images/Pjs/PJSebas2.png')
-img_enemy= pygame.image.load ('Images/Enemies/enemy.png')
+
 img_wolf= pygame.image.load ('Images/Enemies/wolf2.png')
 
 class Player(pygame.sprite.Sprite):
@@ -51,10 +51,11 @@ class Player(pygame.sprite.Sprite):
 		self.rect.x+=self.vel_in_platform
 
 class Enemies (pygame.sprite.Sprite):
-	def __init__(self, px, py):
+	def __init__(self,img_enemy, px, py):
 		pygame.sprite.Sprite.__init__(self)
 		self.health = 500
-		self.cut = CortarImagen(img_enemy, 0, 0, 3, 1)
+		self.img_enemy=img_enemy
+		self.cut = CortarImagen(self.img_enemy, 0, 0, 3, 1)
 		self.image = self.cut
 		self.rect = self.image.get_rect()
 		self.rect.x = px
@@ -70,7 +71,7 @@ class Enemies (pygame.sprite.Sprite):
 		self.coldown=0
 	def update (self):
 		if self.action < 3:
-			self.cut=CortarImagen(img_enemy,self.action,0,3,1)
+			self.cut=CortarImagen(self.img_enemy,self.action,0,3,1)
 			self.action+=1
 			self.image=self.cut
 		else:

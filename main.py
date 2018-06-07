@@ -60,17 +60,19 @@ if __name__ == '__main__':
 	img_paper=pygame.image.load('Images/Instruments/paper.png')
 	img_item_heal=pygame.image.load('Images/Items/item_heal.png')
 	img_item_ukulele=pygame.image.load('Images/Instruments/ukulele1.png')
+	img_enemy= pygame.image.load ('Images/Enemies/enemy.png')
+	img_enemy_inv=pygame.image.load('Images/Enemies/enemy_inv.png')
 
 	#CREACION DE OBJETOS
-	
-	
+
+
 	#Creacion de Estrellitas
 	S = Star(100, 100)
 	Stars.add(S)
 	todos.add(S)
 
 	#enemigos
-	enemy=Enemies(800,500)
+	enemy=Enemies(img_enemy,800,500)
 	all_enemies.add(enemy)
 	todos.add(enemy)
 
@@ -102,7 +104,7 @@ if __name__ == '__main__':
 
 	for p in  Plataformas:
 		if (p.id % 2) == 0:
-			e=Enemies(0,0)
+			e=Enemies(img_enemy,0,0)
 			e.rect.x=p.rect.x
 			e.rect.bottom=p.rect.top
 			all_enemies.add(e)
@@ -287,8 +289,14 @@ while not close:
 	for e in all_enemies:
 		if e.coldown==40:
 			if e.rect.x > 0 and e.rect.x < 1200:
+				if Jugador.rect.x > e.rect.x:
+					e.img_enemy=img_enemy_inv
+					vel=20
+				else :
+					e.img_enemy=img_enemy
+					vel=-20
 				p=Paper(img_paper,e.rect.x,e.rect.y)
-				p.vel_x=-20
+				p.vel_x=vel
 				bullets_enemies.add(p)
 				todos.add(p)
 			e.coldown=0
