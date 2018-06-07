@@ -9,3 +9,9 @@ class item_heal (pygame.sprite.Sprite):
         self.vel_x=0
     def update (self):
         self.rect.x+=self.vel_x
+class item_weapon (item_heal):
+    def __init__ (self,img,px,py):
+        item_heal.__init__(self,img,px,py)
+        self.type_weapon=0
+    def update (self):
+        self.rect.x+=self.vel_x

@@ -25,6 +25,7 @@ class Player(pygame.sprite.Sprite):
 		self.saltar	 = False
 		self.is_jumping = False
 		self.vel_in_platform=0
+		self.type_weapon=1
 
 	def gravedad(self,v):
 		if self.vel_y == 0:

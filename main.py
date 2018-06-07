@@ -5,10 +5,13 @@ import pygame
 import random
 from Objects.Level import *
 from Objects.Player import *
-from Objects.bullets import Ukulele,Paper
+from Objects.bullets import Ukulele,Paper,Ball
 from Objects.Plataforma import *
-from Objects.items import item_heal
-
+from Objects.items import item_heal,item_weapon
+# rules for programing balls
+# 1 = ball
+# 2 = ukulele
+# 3 = dipstick
 #Definicion de Variables
 ancho = 1200
 alto = 650
@@ -46,13 +49,14 @@ if __name__ == '__main__':
 	Plataformas = pygame.sprite.Group()
 	Wolfs = pygame.sprite.Group()
 	items_heal=pygame.sprite.Group()
-
+	items_weapon=pygame.sprite.Group()
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
 	img3=pygame.image.load('Images/platform/Car.png')
 	img_ukulele=pygame.image.load('Images/Instruments/ukulele1.png')
 	img_paper=pygame.image.load('Images/Instruments/paper.png')
 	img_item_heal=pygame.image.load('Images/Items/item_heal.png')
+	img_item_ukulele=pygame.image.load('Images/Instruments/ukulele1.png')
 
 	#CREACION DE OBJETOS
 
@@ -99,6 +103,13 @@ if __name__ == '__main__':
 			i.rect.x=p.rect.x+15
 			i.rect.bottom=p.rect.top
 			items_heal.add(i)
+			todos.add(i)
+		if p.id == 12 or  p.id == 1:
+			i=item_weapon(img_item_ukulele,0,0)
+			i.rect.x=p.rect.x+15
+			i.rect.bottom=p.rect.top
+			i.type_weapon=2
+			items_weapon.add(i)
 			todos.add(i)
 
 	#Jugador
@@ -177,10 +188,16 @@ while not close:
 				mirada = False
 				i2 = 0
 			elif event.key == pygame.K_g:
-				ukulele=Ukulele(Jugador.rect.right,Jugador.rect.y)
-				ukulele.vel_x=20
-				balas_personaje.add(ukulele)
-				todos.add(ukulele)
+				if Jugador.type_weapon==1:
+					ball=Ball(Jugador.rect.right,Jugador.rect.y)
+					ball.vel_x=20
+					balas_personaje.add(ball)
+					todos.add(ball)
+				elif Jugador.type_weapon==2:
+					ukulele=Ukulele(Jugador.rect.right,Jugador.rect.y)
+					ukulele.vel_x=20
+					balas_personaje.add(ukulele)
+					todos.add(ukulele)
 			if event.key == pygame.K_l:
 				is_pause=True
 
@@ -312,6 +329,9 @@ while not close:
 			Jugador.health+=20
 		if Jugador.health > 300:
 			Jugador.health=300
+	col_Jugador_item_weapon=pygame.sprite.spritecollide(Jugador,items_weapon,True)
+	for c in col_Jugador_item_weapon:
+		Jugador.type_weapon=c.type_weapon
 
 
 
@@ -332,7 +352,8 @@ while not close:
 			e.vel_x= -Jugador.vel_x
 		for i in items_heal:
 			i.vel_x=-Jugador.vel_x
-
+		for i in items_weapon:
+			i.vel_x=-Jugador.vel_x
 
 
 	else:
@@ -344,6 +365,9 @@ while not close:
 			e.vel_x=0
 		for i in items_heal:
 			i.vel_x=0
+		for i in items_weapon:
+			i.vel_x=0
+
 
 #colisiones
 
