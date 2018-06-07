@@ -168,7 +168,7 @@ while not close:
 				mirada = False
 				i2 = 0
 			elif event.key == pygame.K_g:
-				ukulele=Ukulele(img_ukulele,Jugador.rect.right,Jugador.rect.y)
+				ukulele=Ukulele(Jugador.rect.right,Jugador.rect.y)
 				ukulele.vel_x=20
 				balas_personaje.add(ukulele)
 				todos.add(ukulele)
