@@ -386,6 +386,12 @@ while not close:
 	#Movimiento del Fondo y plataformas
 
 	if(Jugador.vel_x != 0):
+		if(Jugador.vel_x>0):
+			for p in Palomas:
+				p.vel_x = -20
+		elif(Jugador.vel_x<0):
+			for p in Palomas:
+				p.vel_x = 0
 		for l in Lvls:
 			Lvl1.vel_x = -Jugador.vel_x
 		for i in Plataformas:
@@ -399,6 +405,8 @@ while not close:
 
 
 	else:
+		for p in Palomas:
+			p.vel_x = -10
 		for l in Lvls:
 			Lvl1.vel_x = 0
 		for i in Plataformas:
