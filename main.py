@@ -426,6 +426,14 @@ while not close:
 
 
 #colisiones
+	if(Lvl1.rect.x >0):
+		Jugador.vel_x = 0
+		Lvl1.rect.x = 0
+	elif(Lvl1.rect.x<-5190):
+		Jugador.vel_x = 0
+		Lvl1.rect.x = -5190
+
+
 
 	#Colisiones con plataformas
 	col_plataformas = pygame.sprite.spritecollide(Jugador,Plataformas,False)
