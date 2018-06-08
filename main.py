@@ -69,7 +69,7 @@ if __name__ == '__main__':
 	#CREACION DE OBJETOS
 
 	#Creacion de Palomas
-	for p in xrange(1,10):
+	for p in xrange(1,30):
 		P = Paloma(p*1000)
 		Palomas.add(P)
 		todos.add(P)
@@ -79,6 +79,7 @@ if __name__ == '__main__':
 	S = Star(100, 100)
 	Stars.add(S)
 	todos.add(S)
+	
 
 	#enemigos
 	enemy=Enemies(img_enemy,800,500)
