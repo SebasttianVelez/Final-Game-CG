@@ -8,6 +8,7 @@ from Objects.Player import *
 from Objects.bullets import Ukulele,Paper,Ball
 from Objects.Plataforma import *
 from Objects.Star import *
+from Objects.Paloma import *
 from Objects.items import item_heal,item_weapon
 from functions.tuto import Tutorial
 # rules for programing balls
@@ -53,6 +54,7 @@ if __name__ == '__main__':
 	items_heal=pygame.sprite.Group()
 	items_weapon=pygame.sprite.Group()
 	Stars = pygame.sprite.Group()
+	Palomas = pygame.sprite.Group()
 
 	#Images
 	img=pygame.image.load ('Images/platform/Platform.png')
@@ -65,6 +67,12 @@ if __name__ == '__main__':
 	img_enemy_inv=pygame.image.load('Images/Enemies/enemy_inv.png')
 
 	#CREACION DE OBJETOS
+
+	#Creacion de Palomas
+	for p in xrange(1,10):
+		P = Paloma(p*1000)
+		Palomas.add(P)
+		todos.add(P)
 
 
 	#Creacion de Estrellitas
@@ -266,6 +274,11 @@ while not close:
 			pygame.display.flip()
 
 #Movimiento de sprites
+
+	#Sprites para la paloma
+	for p in Palomas:
+		p.i += 1
+
 	if(Jugador.vel_x>0):#movimiento a la derecha
 		Jugador.cut=CortarImagen(img1,i1,1,7,4)
 		Jugador.dir = True
