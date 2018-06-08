@@ -356,7 +356,13 @@ while not close:
 		if b.rect.x>ancho or b.rect.y < 0:
 			balas_personaje.remove(b)
 			todos.remove(b)
-			print 'bala removida'
+
+#REMOVER PALOMAS
+
+	for p in Palomas:
+		if p.rect.x <= -50:
+			Palomas.remove(p)
+			todos.remove(p)
 #balas de enemigos
 	for b in bullets_enemies:
 		if b.rect.x <= 0:
