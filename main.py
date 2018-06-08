@@ -9,6 +9,7 @@ from Objects.bullets import Ukulele,Paper,Ball
 from Objects.Plataforma import *
 from Objects.Star import *
 from Objects.items import item_heal,item_weapon
+from functions.tuto import Tutorial
 # rules for programing balls
 # 1 = ball
 # 2 = ukulele
@@ -168,6 +169,8 @@ while not close_menu_inicial:
 				elif opcion_menu_inicial==4:
 					close_menu_inicial=True
 					close=True
+				elif opcion_menu_inicial==2:
+					Tutorial(Screen)
 	if opcion_menu_inicial==1:
 		menustart=pygame.image.load('menu_inicio/Menu_inicio_Start.jpeg')
 	elif opcion_menu_inicial==2:
