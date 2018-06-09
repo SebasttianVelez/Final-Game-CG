@@ -80,6 +80,10 @@ if __name__ == '__main__':
 	Stars.add(S)
 	todos.add(S)
 	
+	S2 = Star(200, 110)
+	Stars.add(S2)
+	todos.add(S2)
+	
 
 	#enemigos
 	enemy=Enemies(img_enemy,800,500)
